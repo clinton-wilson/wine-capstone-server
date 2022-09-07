@@ -1,0 +1,18 @@
+[
+    {
+        "model": "wineapi.winefavorite",
+        "pk": 1,
+        "fields": {
+            "wine_id": 2,
+            "wine_user_id": 1
+        }
+    },
+    {
+        "model": "wineapi.winefavorite",
+        "pk": 2,
+        "fields": {
+            "wine_id": 4,
+            "wine_user_id": 1
+        }
+    }
+]

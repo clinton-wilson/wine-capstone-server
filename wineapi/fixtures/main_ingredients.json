@@ -1,0 +1,16 @@
+[
+    {
+        "model": "wineapi.mainingredient",
+        "pk": 1,
+        "fields": {
+            "ingredient": "Steak"
+        }
+    },
+    {
+        "model": "wineapi.mainingredient",
+        "pk": 2,
+        "fields": {
+            "ingredient": "Chicken"
+        }
+    }
+]

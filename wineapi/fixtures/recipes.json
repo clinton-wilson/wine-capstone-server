@@ -1,0 +1,30 @@
+[
+    {
+        "model": "wineapi.recipe",
+        "pk": 1,
+        "fields": {
+            "instructions": "Make that steak, baby!!!",
+            "ingredients": "Steak, butter, salt, garlic. What else do you need?",
+            "prep_time": 10,
+            "cook_time": 15,
+            "serves": 4,
+            "name": "Pan seared steak",
+            "main_ingredient_id": 1,
+            "photo": "https://www.eatwell101.com/wp-content/uploads/2018/03/Garlic-Butter-flank-Steak-and-Potatoes-Skillet.jpg"
+        }
+    },
+    {
+        "model": "wineapi.recipe",
+        "pk": 2,
+        "fields": {
+            "instructions": "Make the chicken",
+            "ingredients": "Chicken, lemon, heavy cream, butter, salt and pepper.",
+            "prep_time": 5,
+            "cook_time": 40,
+            "name": "Creamy lemon chicken",
+            "serves": 4,
+            "main_ingredient_id": 2,
+            "photo": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/20191011-creamy-tuscan-chicken-delish-ehg-2521-1571259466.jpg?crop=0.668xw:1.00xh;0.138xw,0&resize=768:*"
+        }
+    }
+]

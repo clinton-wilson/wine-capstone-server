@@ -1,0 +1,20 @@
+[
+    {
+        "model": "wineapi.winerating",
+        "pk": 1,
+        "fields": {
+            "rating": 4,
+            "wine_id": 2,
+            "wine_user_id": 1
+        }
+    },
+    {
+        "model": "wineapi.winerating",
+        "pk": 1,
+        "fields": {
+            "rating": 3,
+            "wine_id": 4,
+            "wine_user_id": 1
+        }
+    }
+]

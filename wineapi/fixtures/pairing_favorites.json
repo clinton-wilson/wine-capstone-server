@@ -1,0 +1,20 @@
+[
+    {
+        "model": "wineapi.pairingfavorite",
+        "pk": 1,
+        "fields": {
+            "recipe_id": 1,
+            "wine_id": 3,
+            "wine_user_id": 1
+        }
+    },
+    {
+        "model": "wineapi.pairingfavorite",
+        "pk": 2,
+        "fields": {
+            "recipe_id": 2,
+            "wine_id": 4,
+            "wine_user_id": 1
+        }
+    }
+]

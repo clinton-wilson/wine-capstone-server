@@ -1,0 +1,12 @@
+[
+    {
+        "model": "wineapi.wineuser",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "bio": "Eye em whine gie",
+            "admin": true,
+            "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnOvEUstA7VKcG29bqX09YfjjAh5ZrHIyxG1EKz-RJ6w&s"
+        }
+    }
+]

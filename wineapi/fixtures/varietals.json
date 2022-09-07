@@ -1,0 +1,30 @@
+[
+    {
+        "model": "wineapi.varietal",
+        "pk": 1,
+        "fields": {
+            "varietal": "Rose"
+        }
+    },
+    {
+        "model": "wineapi.varietal",
+        "pk": 2,
+        "fields": {
+            "varietal": "Pinot Noir"
+        }
+    },
+    {
+        "model": "wineapi.varietal",
+        "pk": 3,
+        "fields": {
+            "varietal": "Cabernet Sauvignon"
+        }
+    },
+    {
+        "model": "wineapi.varietal",
+        "pk": 4,
+        "fields": {
+            "varietal": "Chardonnay"
+        }
+    }
+]
