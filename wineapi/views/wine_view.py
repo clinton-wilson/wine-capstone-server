@@ -11,8 +11,10 @@ class WineView(ViewSet):
 
     def list(self, request):
         """method to handle getting all recipes"""
-
+        varietal = request.query_params.get('varietal', None)
         wines = Wine.objects.all()
+        if varietal is not None:
+            wines = wines.filter(varietal_id=varietal)
         serializer = WineSerializer(wines, many=True)
         return Response(serializer.data)
     
