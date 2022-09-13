@@ -50,7 +50,7 @@ class RecipeView(ViewSet):
         recipe.instructions=request.data['instructions']
         recipe.ingredients=request.data['ingredients']
         recipe.name=request.data['name']
-        recipe.main_ingredient=request.data['main_ingredient']
+        recipe.main_ingredient_id=request.data['main_ingredient_id']
         recipe.summary=request.data['summary']
         recipe.image=request.data['image']
         recipe.more_info=request.data['more_info']
