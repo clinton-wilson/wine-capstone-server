@@ -12,5 +12,26 @@
         "fields": {
             "ingredient": "Chicken"
         }
+    },
+    {
+        "model": "wineapi.mainingredient",
+        "pk": 3,
+        "fields": {
+            "ingredient": "Salmon"
+        }
+    },
+    {
+        "model": "wineapi.mainingredient",
+        "pk": 4,
+        "fields": {
+            "ingredient": "Duck"
+        }
+    },
+    {
+        "model": "wineapi.mainingredient",
+        "pk": 5,
+        "fields": {
+            "ingredient": "Soft Cheese"
+        }
     }
 ]

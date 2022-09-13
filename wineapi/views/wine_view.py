@@ -12,7 +12,12 @@ class WineView(ViewSet):
     def list(self, request):
         """method to handle getting all recipes"""
         varietal = request.query_params.get('varietal', None)
+        search_term = request.query_params.get('search_term', None)
         wines = Wine.objects.all()
+        if search_term is not None:
+            wines = wines.filter(vintner__icontains = search_term) | wines.filter(vintage__icontains = search_term) | wines.filter(varietal__varietal__icontains = search_term) | wines.filter(main_ingredient__ingredient__icontains = search_term)
+        # if search_term is not None:
+        #     wines = wines.filter(vintage__icontains = search_term)
         if varietal is not None:
             wines = wines.filter(varietal_id=varietal)
         serializer = WineSerializer(wines, many=True)
