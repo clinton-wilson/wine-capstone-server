@@ -29,7 +29,8 @@ def login_user(request):
         data = {
             'valid': True,
             'token': token.key,
-            'admin': wine_user.admin
+            'admin': wine_user.admin,
+            'current_wine_user': wine_user.id
         }
         return Response(data)
     else:

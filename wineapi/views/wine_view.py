@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from wineapi.models import Wine
 from wineapi.models.varietal import Varietal
+from wineapi.models.main_ingredient import MainIngredient
 from wineapi.models.wine_user import WineUser
 from wineapi.serializers import WineSerializer
 
@@ -38,9 +39,11 @@ class WineView(ViewSet):
         
         wine_user = WineUser.objects.get(user=request.auth.user)
         varietal = Varietal.objects.get(pk=request.data['varietal'])
+        main_ingredient = MainIngredient.objects.get(pk=request.data['main_ingredient'])
         wine = Wine.objects.create(
             varietal=varietal,
             submitted_by=wine_user,
+            main_ingredient=main_ingredient,
             vintner=request.data['vintner'],
             vintage=request.data['vintage'],
             photo=request.data['photo']
