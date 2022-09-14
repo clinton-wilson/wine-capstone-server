@@ -5,15 +5,15 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from wineapi.models import WineUser
+from wineapi.models import WineUser, wine_user
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login_user(request):
-    '''Handles the authentication of a gamer
+    '''Handles the authentication of a wine user
 
     Method arguments:
-      request -- The full HTTP request object
+    request -- The full HTTP request object
     '''
     username = request.data['username']
     password = request.data['password']
@@ -25,9 +25,11 @@ def login_user(request):
     # If authentication was successful, respond with their token
     if authenticated_user is not None:
         token = Token.objects.get(user=authenticated_user)
+        wine_user = WineUser.objects.get(user=authenticated_user)
         data = {
             'valid': True,
-            'token': token.key
+            'token': token.key,
+            'admin': wine_user.admin
         }
         return Response(data)
     else:
@@ -38,7 +40,7 @@ def login_user(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register_user(request):
-    '''Handles the creation of a new gamer for authentication
+    '''Handles the creation of a new wine user for authentication
 
     Method arguments:
       request -- The full HTTP request object
@@ -53,7 +55,7 @@ def register_user(request):
         last_name=request.data['last_name']
     )
 
-    # Now save the extra info in the levelupapi_gamer table
+    # Now save the extra info in the wineapi_wine_user table
     wine_user = WineUser.objects.create(
         bio=request.data['bio'],
         photo=request.data['photo'],
@@ -64,5 +66,6 @@ def register_user(request):
     # Use the REST Framework's token generator on the new user account
     token = Token.objects.create(user=wine_user.user)
     # Return the token to the client
-    data = { 'token': token.key }
+    data = { 'token': token.key,
+            'admin': wine_user.admin}
     return Response(data)
