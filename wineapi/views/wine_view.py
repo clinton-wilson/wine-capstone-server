@@ -63,6 +63,8 @@ class WineView(ViewSet):
         wine.submitted_by=wine_user
         varietal = Varietal.objects.get(pk=request.data['varietal'])
         wine.varietal=varietal
+        main_ingredient = MainIngredient.objects.get(pk=request.data['main_ingredient'])
+        wine.main_ingredient=main_ingredient
         
         wine.save()
         

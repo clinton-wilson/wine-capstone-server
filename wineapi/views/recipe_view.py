@@ -1,6 +1,7 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
+from wineapi.models.main_ingredient import MainIngredient
 
 from wineapi.models.recipe import Recipe
 from wineapi.serializers.recipe_serializer import RecipeSerializer
@@ -50,12 +51,15 @@ class RecipeView(ViewSet):
         recipe.instructions=request.data['instructions']
         recipe.ingredients=request.data['ingredients']
         recipe.name=request.data['name']
-        recipe.main_ingredient_id=request.data['main_ingredient_id']
+        # recipe.main_ingredient_id=request.data['main_ingredient_id']
         recipe.summary=request.data['summary']
         recipe.image=request.data['image']
         recipe.more_info=request.data['more_info']
         recipe.ready_in_minutes=request.data['ready_in_minutes']
         recipe.serves=request.data['serves']
+        
+        main_ingredient = MainIngredient.objects.get(pk=request.data['main_ingredient'])
+        recipe.main_ingredient=main_ingredient
         
         recipe.save()
         
