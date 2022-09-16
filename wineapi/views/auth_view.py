@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from wineapi.models import WineUser, wine_user
+from wineapi.models import WineUser
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -68,5 +68,6 @@ def register_user(request):
     token = Token.objects.create(user=wine_user.user)
     # Return the token to the client
     data = { 'token': token.key,
-            'admin': wine_user.admin}
+            'admin': wine_user.admin,
+            'current_user': wine_user.id}
     return Response(data)
