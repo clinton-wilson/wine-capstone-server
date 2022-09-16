@@ -9,3 +9,14 @@ class Wine(models.Model):
     submitted_by = models.ForeignKey("WineUser", on_delete=models.CASCADE, related_name="submitted_by_wines")
     photo = models.TextField(null=True)
     main_ingredient = models.ForeignKey("MainIngredient", on_delete=models.CASCADE, related_name="wines")
+    
+    def __str__(self):
+        return self.name
+    
+    @property
+    def favorited(self):
+        return self.__favorited
+    
+    @favorited.setter
+    def favorited(self, value):
+        self.__favorited = value

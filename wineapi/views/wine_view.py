@@ -2,6 +2,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from wineapi.models import Wine
+from rest_framework.decorators import action
+from wineapi.models import wine_user
 from wineapi.models.varietal import Varietal
 from wineapi.models.main_ingredient import MainIngredient
 from wineapi.models.wine_user import WineUser
@@ -9,11 +11,29 @@ from wineapi.serializers import WineSerializer
 
 class WineView(ViewSet):
     """viewset for handling wine requests"""
+    
+    @action(methods=['post'], detail=True)
+    def favorite(self, request, pk):
+        """post request for a user to favorite a wine"""
+        
+        wine = Wine.objects.get(pk=pk)
+        wine_user = WineUser.objects.get(user=request.auth.user)
+        wine.favorite.add(wine_user)
+        return Response({'message': 'Wine favorited'}, status=status.HTTP_201_CREATED)
+    
+    @action(methods=['delete'], detail=True)
+    def unfavorite(self, request, pk):
+        """delete request for a user to favorite a wine"""
+        wine = Wine.objects.get(pk=pk)
+        wine_user = WineUser.objects.get(user=request.auth.user)
+        wine.favorite.remove(wine_user)
+        return Response({'message': 'Wine unfavorited'}, status=status.HTTP_204_NO_CONTENT)
 
     def list(self, request):
-        """method to handle getting all recipes"""
+        """method to handle getting all wines"""
         varietal = request.query_params.get('varietal', None)
         search_term = request.query_params.get('search_term', None)
+        wine_user = WineUser.objects.get(user=request.auth.user)
         wines = Wine.objects.all()
         if search_term is not None:
             wines = wines.filter(vintner__icontains = search_term) | wines.filter(vintage__icontains = search_term) | wines.filter(varietal__varietal__icontains = search_term) | wines.filter(main_ingredient__ingredient__icontains = search_term)
@@ -21,6 +41,9 @@ class WineView(ViewSet):
         #     wines = wines.filter(vintage__icontains = search_term)
         if varietal is not None:
             wines = wines.filter(varietal_id=varietal)
+        for wine in wines:
+            wine.favorited = wine_user in wine.favorite.all()
+            
         serializer = WineSerializer(wines, many=True)
         return Response(serializer.data)
     
