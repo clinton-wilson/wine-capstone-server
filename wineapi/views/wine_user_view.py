@@ -25,3 +25,9 @@ class WineUserView(ViewSet):
         except WineUser.DoesNotExist as ex:
             return Response({'message': ex.args[0]},
             status=status.HTTP_404_NOT_FOUND)
+            
+    def update(self, request, pk):
+        wine_user=WineUser.objects.get(pk=pk)
+        wine_user.admin=request.data['admin']
+        wine_user.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
