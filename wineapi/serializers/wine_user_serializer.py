@@ -8,7 +8,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'first_name', 'last_name', 'username', 'email')
 
 class WineUserSerializer(serializers.ModelSerializer):
-    UserSerializer()
+    user = UserSerializer()
     class Meta:
         model = WineUser
         fields = ('id', 'photo', 'bio', 'admin', 'user')
+        depth = 1

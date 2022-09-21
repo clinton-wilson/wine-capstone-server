@@ -20,6 +20,7 @@ from django.urls import path
 from rest_framework import routers
 from wineapi.views import register_user, login_user
 from wineapi.views import WineView, MainIngredientView, PairingFavoriteView, RecipeView, VarietalView
+from wineapi.views.wine_user_view import WineUserView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'wines', WineView, 'wine')
@@ -27,6 +28,7 @@ router.register(r'mainingredients', MainIngredientView, "mainingredient")
 router.register(r'pairingfavorites', PairingFavoriteView, 'pairingfavorite')
 router.register(r'recipes', RecipeView, 'recipe')
 router.register(r'varietals', VarietalView, 'varietal')
+router.register(r'users', WineUserView, 'user')
 
 urlpatterns = [
     path('register', register_user),
