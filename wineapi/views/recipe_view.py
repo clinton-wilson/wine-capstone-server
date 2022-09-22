@@ -1,14 +1,32 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import action
 from wineapi.models.main_ingredient import MainIngredient
-
 from wineapi.models.recipe import Recipe
 from wineapi.serializers.recipe_serializer import RecipeSerializer
 
 class RecipeView(ViewSet):
     """Viewset for handling recipe requests
     """
+    
+    @action(methods=['post'], detail=True)
+    def add_ingredient(self, request, pk):
+        """post request for a main ingredient to get added to a recipe"""
+        
+        recipe = Recipe.objects.get(pk=pk)
+        main_ingredient = MainIngredient.objects.get(pk=pk)
+        recipe.main_ingredient.add(main_ingredient)
+        return Response({'message': 'Main ingredient added'}, status=status.HTTP_201_CREATED)
+    
+    @action(methods=['delete'], detail=True)
+    def remove_ingredient(self, request, pk):
+        """delete request for an ingredient to get removed from a recipe"""
+        
+        recipe = Recipe.objects.get(pk=pk)
+        main_ingredient = MainIngredient.objects.get(pk=pk)
+        recipe.main_ingredient.remove(main_ingredient)
+        return Response({'message': 'Main ingredient removed'}, status=status.HTTP_204_NO_CONTENT)
     
     def list(self, request):
         """method to handle getting all recipes"""

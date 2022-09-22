@@ -36,9 +36,7 @@ class WineView(ViewSet):
         wine_user = WineUser.objects.get(user=request.auth.user)
         wines = Wine.objects.all()
         if search_term is not None:
-            wines = wines.filter(vintner__icontains = search_term) | wines.filter(vintage__icontains = search_term) | wines.filter(varietal__varietal__icontains = search_term) | wines.filter(main_ingredient__ingredient__icontains = search_term)
-        # if search_term is not None:
-        #     wines = wines.filter(vintage__icontains = search_term)
+            wines = wines.filter(title__icontains = search_term) | wines.filter(varietal__varietal__icontains = search_term) | wines.filter(main_ingredient__ingredient__icontains = search_term)
         if varietal is not None:
             wines = wines.filter(varietal_id=varietal)
         for wine in wines:
@@ -78,8 +76,9 @@ class WineView(ViewSet):
         """handle put requests for a wine"""
         
         wine=Wine.objects.get(pk=pk)
-        wine.vintner=request.data['vintner']
-        wine.vintage=request.data['vintage']
+        wine.title=request.data['title']
+        wine.price=request.data['price']
+        wine.description=request.data['description']
         wine.photo=request.data['photo']
         
         wine_user = WineUser.objects.get(user=request.auth.user)

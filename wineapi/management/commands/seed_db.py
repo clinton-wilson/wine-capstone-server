@@ -6,24 +6,24 @@ from wineapi.models.wine import Wine
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        recipe_request = requests.get('https://api.spoonacular.com/recipes/random?apiKey=632689716d184289ba940f30a19e4cf6&number=10')
-        for r in recipe_request.json()["recipes"]:
-            ingredients = ""
-            for i in r["extendedIngredients"]:
-                ingredients += i["original"]
-            recipe = Recipe.objects.create(
-                instructions=r["instructions"],
-                ingredients=ingredients,
-                ready_in_minutes=r["readyInMinutes"],
-                image=r["image"],
-                name=r["title"],
-                serves=r["servings"],
-                summary=r["summary"],
-                more_info=r["sourceUrl"]
-                )
+        # recipe_request = requests.get('https://api.spoonacular.com/recipes/random?apiKey=de0370b0aae443489712b13c4bfdcc22&number=10')
+        # for r in recipe_request.json()["recipes"]:
+        #     ingredients = ""
+        #     for i in r["extendedIngredients"]:
+        #         ingredients += i["original"]
+        #     recipe = Recipe.objects.create(
+        #         instructions=r["instructions"],
+        #         ingredients=ingredients,
+        #         ready_in_minutes=r["readyInMinutes"],
+        #         image=r["image"],
+        #         name=r["title"],
+        #         serves=r["servings"],
+        #         summary=r["summary"],
+        #         more_info=r["sourceUrl"]
+        #         )
             
-        wine_request = requests.get('https://api.spoonacular.com/food/wine/recommendation?apiKey=632689716d184289ba940f30a19e4cf6&wine=merlot')
-        for w in wine_request.json()['wines']:
+        wine_request = requests.get('https://api.spoonacular.com/food/wine/recommendation?apiKey=de0370b0aae443489712b13c4bfdcc22&wine=pinot_noir&number=12')
+        for w in wine_request.json()["recommendedWines"]:
             wine = Wine.objects.create(
                 title=w['title'],
                 description=w['description'],
